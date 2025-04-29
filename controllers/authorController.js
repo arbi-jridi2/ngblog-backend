@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
       email: author.email,
       fullName: author.name + ' ' + author.lastName
     }
-    let key = '123456';
+    let key = process.env.JWT_SECRET;
     let token = jwt.sign(payload, key,{ expiresIn: '1h' });
     res.send({ mytoken: token });
   } catch (err) {

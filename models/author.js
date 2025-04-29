@@ -6,6 +6,7 @@ const Author = mongoose.model('Author', {
     password: { type: String },
     image: { type: String },
     about: { type: String },
+    linkedin: { type: String },
     //articles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }]
 });
 

@@ -10,5 +10,6 @@ router.delete('/delete/:id', articleController.deleteArticle);
 router.put('/update/:id', articleController.upload.single('image'), articleController.updateArticle);
 router.put('/:id/like', articleController.likeArticle);
 router.put('/:id/comment', articleController.commentArticle);
+router.get('/search', articleController.searchArticles);
 
 module.exports = router;

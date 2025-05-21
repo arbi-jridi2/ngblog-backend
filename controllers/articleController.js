@@ -121,3 +121,23 @@ exports.commentArticle = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.searchArticles = async (req, res) => {
+  try {
+    const q = req.query.q;
+    if (!q) {
+      return res.status(400).json({ message: 'No search query provided' });
+    }
+    const articles = await Article.find({
+      $or: [
+        { title: { $regex: q, $options: 'i' } },
+        { tags: { $regex: q, $options: 'i' } },
+        { description: { $regex: q, $options: 'i' } },
+        { content: { $regex: q, $options: 'i' } }
+      ]
+    });
+    res.json(articles);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}

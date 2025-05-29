@@ -11,7 +11,7 @@ MEAN stack blog backend handling articles, authors, authentication, and media up
 ```
 # Blog Backend API
 
-```
+
 backend/
 ├── config/           # Configuration files
 │   ├── cloudinary.js # Cloudinary media config
@@ -26,7 +26,7 @@ backend/
 │   ├── article.js
 │   └── author.js
 └── server.js         # Entry point
-
+```
 
 ## Features
 - RESTful API endpoints

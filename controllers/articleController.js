@@ -144,14 +144,21 @@ exports.searchArticles = async (req, res) => {
 
 exports.tagArticles = async (req, res) => {
   try {
-    const articles = await Article.find({ tags: req.params.tag })
-      .sort({ date: -1 })
-      .populate({
-        path: 'idAuthor',
-        select: '_id',
-        model: 'Author'
-      });
-    res.json(articles);
+    const articles = await Article.find({ tags: req.params.tag }).sort({ date: -1 });
+    const authorIds = [...new Set(articles.map(a => a.idAuthor))];
+    
+    // Fetch authors 
+    const authors = await Author.find({ 
+      _id: { $in: authorIds }
+    }, '_id name lastName image');
+    
+    // Map authors to articles
+    const articlesWithAuthors = articles.map(article => ({
+      ...article.toObject(),
+      idAuthor: authors.find(a => a._id.toString() === article.idAuthor)
+    }));
+    
+    res.json(articlesWithAuthors);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

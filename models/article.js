@@ -17,6 +17,10 @@ const Article = mongoose.model('Article',{
     tags:{ type :Array },
     likes: { type: Number, default: 0 },
     comments: [commentSchema]
-});
+},{ 
+  strictPopulate: false,
+  timestamps: true 
+}
+);
 
 module.exports = Article;

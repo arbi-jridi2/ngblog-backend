@@ -2,8 +2,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const URI = 'mongodb+srv://arbijridi:arbi123456@ngblog.d0jsu.mongodb.net/ngblog?retryWrites=true&w=majority&appName=ngblog';
 mongoose.connect(URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+/*   useNewUrlParser: true,
+  useUnifiedTopology: true, */
   strictPopulate: false 
 })
 .then(() => {

@@ -11,5 +11,5 @@ router.put('/update/:id', articleController.upload.single('image'), articleContr
 router.put('/:id/like', articleController.likeArticle);
 router.put('/:id/comment', articleController.commentArticle);
 router.get('/search', articleController.searchArticles);
-
+router.get('/tag/:tag', articleController.tagArticles);
 module.exports = router;

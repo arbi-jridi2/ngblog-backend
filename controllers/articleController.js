@@ -141,3 +141,14 @@ exports.searchArticles = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 }
+
+exports.tagArticles = async (req, res) => {
+  try {
+    const articles = await Article.find({ tags: req.params.tag })
+      .sort({ date: -1 })
+      .populate('author', 'name lastName image');
+    res.json(articles);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}

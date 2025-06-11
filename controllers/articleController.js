@@ -144,7 +144,12 @@ exports.searchArticles = async (req, res) => {
 
 exports.tagArticles = async (req, res) => {
   try {
-    const articles = await Article.find({ tags: req.params.tag , $options :'i' }).sort({ date: -1 });
+    const articles = await Article.find({
+      tags: {
+        $regex: req.params.tag,
+        $options: 'i'
+      }
+    }).sort({ date: -1 });
     res.json(articles);
   } catch (error) {
     res.status(500).json({ message: error.message });

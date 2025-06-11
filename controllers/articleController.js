@@ -146,7 +146,11 @@ exports.tagArticles = async (req, res) => {
   try {
     const articles = await Article.find({ tags: req.params.tag })
       .sort({ date: -1 })
-      .populate('author', 'name lastName image');
+      .populate({
+        path: 'idAuthor',
+        select: '_id',
+        model: 'Author'
+      });
     res.json(articles);
   } catch (error) {
     res.status(500).json({ message: error.message });
